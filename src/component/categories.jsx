@@ -3,6 +3,9 @@ import Category from './category.jsx';
 
 const Categories = (props) => (
     <div className="col-3">
+      <div>        
+        <button onClick={(event) => { props.setCategory(); }}>All Products</button>
+      </div>  
         {
             props.categories.map((category) => (
                 <Category category={category} key={category} setCategory={props.setCategory}/>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Product = (props) => (
-    <div className="well" ng-repeat="item in data.products | filter:categoryFilterFn | range:selectedPage:pageSize">
+    <div className="well">
         <h3>
             <strong>{props.product.name}</strong>
             <span className="pull-right label label-primary">

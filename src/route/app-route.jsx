@@ -5,8 +5,8 @@ import DashboardView from '../component/dashboard.jsx';
 const AppRouter = () => (
     <BrowserRouter>
         <Switch>
-            <Route path='/' exact={true} component={DashboardView}/>
-            <Route path='/products' component={DashboardView}/>            
+          <Route path='/' component={DashboardView}/>            
+          <Route path='/products' component={DashboardView}/>            
         </Switch>
     </BrowserRouter>
 );
