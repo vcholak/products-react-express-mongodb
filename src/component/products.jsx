@@ -25,7 +25,7 @@ class Products extends React.Component {
           <span>Page: </span>
           {
             pages.map((page) => (          
-              <button key={page} className='btn btn-link' onClick={(event) => { this.props.setPage(page); }}>{page}</button>
+              <button key={page} className='btn btn-default' onClick={(event) => { this.props.setPage(page); }}>{page}</button>
             ))
           }
         </div>        
