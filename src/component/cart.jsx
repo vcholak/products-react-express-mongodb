@@ -5,7 +5,7 @@ class Cart extends React.Component {
 
   render() {
     return (
-      <div className="col-8">Cart Items:</div>
+      <div className="col-8">Cart Items: {this.props.cartItems.length}</div>
     );    
   }  
 }

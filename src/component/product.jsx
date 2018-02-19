@@ -8,7 +8,7 @@ const Product = (props) => (
                 ${props.product.price}
             </span>
         </h3>
-        <button onClick={props.addToCart(props.product)}  className="btn btn-success pull-right">
+        <button onClick={(event) => { props.addToCart(props.product, 1);}} className="btn btn-success pull-right">
             Add to Cart
         </button>
         <span className="lead">{props.product.description}</span>
