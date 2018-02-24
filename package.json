@@ -22,7 +22,7 @@
     "dev-ui": "webpack-dev-server --watch",
     "dev": "nodemon -w src/server --exec \"babel-node src/server --presets=env,react --plugins=transform-class-properties\"",
     "build": "babel src/server -s -D -d server --presets=env,react --plugins=transform-class-properties",
-    "prebuild": "yarn run -s build-ui",    
+    "prebuild": "yarn run -s build-ui",
     "start": "node server",
     "prestart": "yarn run -s build",
     "test": "eslint src"
@@ -59,6 +59,7 @@
     "redux": "^3.7.2",
     "resource-router-middleware": "^0.7.0",
     "serve-favicon": "^2.4.5",
+    "shutdown-handler": "^1.0.1",
     "validator": "^9.4.0"
   },
   "devDependencies": {

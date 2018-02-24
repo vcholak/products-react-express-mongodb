@@ -5,7 +5,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import favicon from 'serve-favicon';
-import initializeDb from './db';
+import connectDb from './db';
 import middleware from './middleware';
 import api from './api';
 import config from './config.json';
@@ -30,7 +30,7 @@ app.use(favicon(path.join(__dirname, '../public', 'favicon.ico')));
 app.use(express.static(path.join(__dirname,'../public')));
 
 // connect to db
-initializeDb((db) => {
+connectDb(db => {
 
 	// internal middleware
 	app.use(middleware({ config, db }));
@@ -39,8 +39,8 @@ initializeDb((db) => {
 	app.use('/api', api({ config, db }));
 
 	app.server.listen(process.env.PORT || config.port, () => {
-		console.log(`Started on port ${app.server.address().port}`);
-	});
+		console.log(`Started App on port ${app.server.address().port}`);
+	});	
 });
 
 export default app;
