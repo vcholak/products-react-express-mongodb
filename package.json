@@ -6,14 +6,50 @@
   "repository": "https://github.com/vcholak/products-react-express-mongodb.git",
   "author": "Vladimir Cholak <volchok60@yahoo.com>",
   "license": "MIT",
+  "keywords": [
+    "react",
+    "redux",
+    "express",
+    "mongodb",
+    "es6",
+    "babel",
+    "boostrap4",
+    "sass",
+    "webpack"
+  ],
   "scripts": {
-    "build": "webpack",
-    "start": "webpack-dev-server --watch"
+    "build-ui": "webpack",
+    "dev-ui": "webpack-dev-server --watch",
+    "dev": "nodemon -w src/server --exec \"babel-node src/server --presets=env,react --plugins=transform-class-properties\"",
+    "build": "babel src/server -s -D -d server --presets=env,react --plugins=transform-class-properties",
+    "prebuild": "yarn run -s build-ui",    
+    "start": "node server",
+    "prestart": "yarn run -s build",
+    "test": "eslint src"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "ecmaVersion": 7,
+      "sourceType": "module"
+    },
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "no-console": 0,
+      "no-unused-vars": 1
+    }
   },
   "dependencies": {
+    "body-parser": "^1.18.2",
     "bootstrap": "^4.0.0",
+    "compression": "^1.7.2",
+    "cors": "^2.8.4",
     "express": "^4.16.2",
     "jquery": "^3.3.1",
+    "mongodb": "^3.0.2",
+    "morgan": "^1.9.0",
     "normalize.css": "^8.0.0",
     "popper.js": "^1.12.9",
     "react": "^16.2.0",
@@ -21,16 +57,21 @@
     "react-modal": "^3.1.13",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
+    "resource-router-middleware": "^0.7.0",
+    "serve-favicon": "^2.4.5",
     "validator": "^9.4.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.9",
+    "eslint": "^4.18.0",
     "node-sass": "^4.7.2",
+    "nodemon": "^1.15.1",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.20.1",
     "webpack": "^3.11.0",

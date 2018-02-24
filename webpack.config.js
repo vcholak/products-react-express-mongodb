@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    entry: './src/app.jsx',
+    entry: './src/ui/app.jsx',
     output: {
         path: path.join(__dirname, 'public'),
         filename: 'bundle.js'
@@ -10,7 +10,8 @@ module.exports = {
         rules: [
             {
                 loader: 'babel-loader',
-                test: /\.jsx$/
+                test: /\.jsx$/,
+                exclude: /node_modules/
             },
             {
                 test: /\.s?css$/,

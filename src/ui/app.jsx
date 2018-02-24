@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AppRouter from './route/app-route.jsx';
+import DashboardView from './component/dashboard.jsx';
 import 'normalize.css/normalize.css';
 import './scss/custom.scss';
 
-ReactDOM.render(<AppRouter/>, document.getElementById('app'));
+ReactDOM.render(<DashboardView/>, document.getElementById('app'));
