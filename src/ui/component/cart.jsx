@@ -2,39 +2,32 @@ import React from 'react';
 
 class Cart extends React.Component {
 
-  items = [];
+  items = this.props.cartItems;
 
-  total = () => items.reduce((total, item) => total + item.count * item.price);
+  total = () => this.items.reduce((total, item) => total + item.count * item.price, 0);
   
-  itemCount = () => items.reduce((total, item) => total + item.count);
+  itemCount = () => this.items.reduce((total, item) => total + item.count, 0);
   
   checkout = () => {
-    //
-  }
+    //TODO
+  };
 
   add = (id, name, price) => {
-    let addedToExistingItem = false;
-    for (let i = 0; i < items.length; i++) {
-        if (items[i].id === id) {
-            items[i].count++;
-            addedToExistingItem = true;
-            break;
-        }
-    }
-    if (!addedToExistingItem) {
-        items.push({
-            count: 1, id: id, price: price, name: name
-        });
+    let itemInd = this.items.findIndex( el => el.id === id);      
+    if(itemInd) {
+      this.items[itemInd].count++;
+    } else {
+      this.items.push({
+          count: 1, id: id, price: price, name: name
+      });
     }
   };
 
   remove = (id) => {
-      for (let i = 0; i < items.length; i++) {
-          if (items[i].id === id) {
-              items.splice(i, 1);
-              break;
-          }
-      }
+    let itemInd = this.items.findIndex( el => el.id === id);
+    if(itemInd) {
+      this.items.splice(itemInd, 1);
+    }    
   };
     
   render() {
@@ -42,7 +35,7 @@ class Cart extends React.Component {
       <div className="navbar-right">
         <div className="navbar-text">
           <b>Your cart: </b>
-          {this.props.cartItems.length} item(s),
+          {this.itemCount()} item(s),
           ${ this.total() }
         </div>
         <button onClick={this.checkout()} className="btn btn-default navbar-btn">Checkout</button>

@@ -6,17 +6,19 @@ import Header from './header.jsx';
 
 class DashboardView extends React.Component {
 
-    state = {
-        productListActiveClass: 'btn-primary',
-        pageSize: 3,                
-        allProducts: [],
-        products: [], // products filtered by category
-        productsOnPage: [], // products filtered by category per page        
-        categories: [],
-        currentCategory: undefined,
-        pages: 0,
-        currentPage: undefined,
-        cartItems: []
+    state = {      
+      productListActiveClass: 'btn-primary',
+      pageSize: 3,                
+      allProducts: [],
+      products: [], // products filtered by category
+      productsOnPage: [], // products filtered by category per page        
+      categories: [],
+      currentCategory: undefined,
+      pages: 0,
+      currentPage: undefined,
+      cartItems: [],
+      isLoading: false,
+      error: null
     };
 
     addProductToCart = (product, count) => {
@@ -56,21 +58,51 @@ class DashboardView extends React.Component {
     }
 
     render() {
+      const { cartItems, categories, productsOnPage, pages, isLoading, error } = this.state;
+      if (isLoading) {
         return (
           <div>
-            <Header cartItems={this.state.cartItems}/>
-            <hr/>            
-            <div className="panel panel-default row">
-                <Categories categories={this.state.categories} setCategory={this.setCategory}/>
-                <Products products={this.state.productsOnPage} addToCart={this.addProductToCart} pages={this.state.pages} setPage={this.setPage}/>
-            </div>
+            <h1 style={{textAlign: 'center'}}>Loading products...</h1>
+          </div>
+        ); 
+      }
+      if (error) {
+        const errorMsg = `Error: ${error.statusCode} ${error.statusText}`;
+        return (
+          <div>
+            <h1 style={{textAlign: 'center'}}>{errorMsg}</h1>
           </div>  
         );
+      }
+      return (
+        <div>
+          <Header cartItems={cartItems}/>
+          <hr/>            
+          <div className="panel panel-default row">            
+            <Categories categories={categories} setCategory={this.setCategory}/>
+            <Products products={productsOnPage} addToCart={this.addProductToCart} pages={pages} setPage={this.setPage}/>
+          </div>
+        </div>  
+      );
     }
 
     componentDidMount() {
-        const json = "[{\"name\":\"Kayak\",\"description\":\"A boat for one person\",\"category\":\"Watersports\",\"price\":275},{\"name\":\"Life Jacket\",\"description\":\"Protective and fashionable\",\"category\":\"Watersports\",\"price\":48.95},{\"name\":\"Soccer Ball\",\"description\":\"FIFA-approved size and weight\",\"category\":\"Soccer\",\"price\":19.5},{\"name\":\"Corner Flags\",\"description\":\"Give your playing field a professional look\",\"category\":\"Soccer\",\"price\":34.95},{\"name\":\"Stadium\",\"description\":\"Flat-packed 35,000-seat stadium\",\"category\":\"Soccer\",\"price\":795000},{\"name\":\"Thinking Cap\",\"description\":\"Improve your brain efficiency by 75%\",\"category\":\"Chess\",\"price\":16},{\"name\":\"Unsteady Chair\",\"description\":\"Secretly give your opponent a disadvantage\",\"category\":\"Chess\",\"price\":29.95},{\"name\":\"Human Chess Board\",\"description\":\"A fun game for the family\",\"category\":\"Chess\",\"price\":75},{\"name\":\"Sedona DX\",\"description\":\"A bike with an aluminum frame\",\"category\":\"Bicycle\",\"price\":419},{\"name\":\"Test\",\"description\":\"Delete me\",\"category\":\"Other\",\"price\":25}]";
-        const products = JSON.parse(json);        
+      this.setState(() => ({isLoading: true}));
+      fetch('/api/products')
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {          
+          const error = {
+            statusCode: response.status,
+            statusText: response.statusText
+          };
+          this.setState(() => ({error: error, isLoading: false}));
+          throw new Error('Error while fetching products');
+        }
+      }) 
+      .then(products => {        
+        console.log('products:', products);
         const allCategories = products.map((product) => product.category);
         const categories = [...new Set(allCategories)]; // filtering unique categories
         console.log('categories:', categories);
@@ -79,14 +111,19 @@ class DashboardView extends React.Component {
         const productsOnPage = this.getProductsOnPage(products, 1);
         console.log('productsOnPage:', productsOnPage);
         this.setState(() => ({
+          isLoading: false,
           allProducts: products,
           products: products,
           productsOnPage: productsOnPage,
           pages: pages,
           categories: categories
-        }));        
+        }));
+      })
+      .catch(error => {
+        console.log(error);
+      }); 
     }
-
+    
 }
 
 export default DashboardView;
