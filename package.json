@@ -18,12 +18,11 @@
     "webpack"
   ],
   "scripts": {
-    "build-ui": "webpack",
-    "dev-ui": "webpack-dev-server --watch",
-    "dev": "nodemon -w src/server --exec \"babel-node src/server --presets=env,react --plugins=transform-class-properties\"",
-    "build": "babel src/server -s -D -d server --presets=env,react --plugins=transform-class-properties",
-    "prebuild": "yarn run -s build-ui",
-    "start": "node server",
+    "build": "webpack",
+    "dev": "webpack-dev-server --watch",
+    "dev2": "nodemon -w src/server --exec \"babel-node src/server --presets=env,react --plugins=transform-class-properties\"",
+    "build2": "babel src/server -s -D -d server --presets=env,react --plugins=transform-class-properties",    
+    "start": "node dist/server.js",
     "prestart": "yarn run -s build",
     "test": "eslint src"
   },
