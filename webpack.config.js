@@ -1,6 +1,7 @@
 var path = require('path');
 
 var serverConfig = {
+  mode: 'development', 
   target: 'node',
   entry: './src/server/index.js',
   output: {
@@ -19,6 +20,7 @@ var serverConfig = {
 };
 
 var clientConfig = {
+  mode: 'development',
   target: 'web', // <=== can be omitted as default is 'web'
   entry: './src/ui/app.jsx',
   output: {
@@ -42,7 +44,7 @@ var clientConfig = {
       }
     ]
   },
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-cheap-module-source-map',
   devServer: {
     contentBase: path.join(__dirname, 'public'),
     historyApiFallback: true
