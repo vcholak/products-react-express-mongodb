@@ -18,7 +18,8 @@
   ],
   "scripts": {
     "build": "webpack",
-    "dev": "webpack serve",
+    "watch": "webpack --watch",
+    "dev": "webpack serve --open",
     "dev2": "nodemon -w src/server --exec \"babel-node src/server --presets=env,react --plugins=transform-class-properties\"",
     "build2": "babel src/server -s -D -d server --presets=env,react --plugins=transform-class-properties",
     "start": "node dist/server.js",
