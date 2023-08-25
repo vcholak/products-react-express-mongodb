@@ -1,13 +1,12 @@
 {
   "name": "products-react-express-mongodb",
   "version": "1.0.0",
-  "description": "Products App implemented using React/Redux front-end, Express back-end and MongoDB storage.",
+  "description": "Products App implemented using React front-end, Express back-end and MongoDB storage.",
   "main": "index.js",
   "repository": "https://github.com/vcholak/products-react-express-mongodb.git",
   "license": "MIT",
   "keywords": [
     "react",
-    "redux",
     "express",
     "mongodb",
     "es6",
@@ -73,7 +72,6 @@
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.3",
     "react-router-dom": "^5.2.0",
-    "redux": "^4.1.0",
     "resource-router-middleware": "^0.7.0",
     "serve-favicon": "^2.5.0",
     "shutdown-handler": "^1.0.1",

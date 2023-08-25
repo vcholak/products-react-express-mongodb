@@ -1,7 +1,9 @@
 # Products App
-Products App implemented using React/Redux front-end, Express back-end and MongoDB storage.
+Products App implemented using React front-end, Express back-end and MongoDB storage.
 
 ## Configure
 Import initial products into MongoDB:
 
-`mongoimport --db products --collection products --file products.json`
+```shell
+mongoimport --db products --collection products --file products.json
+```
